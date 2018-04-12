@@ -646,148 +646,148 @@ let CREAT = {
 			var uploadUrl = "http://test.kunlun.treebear.cn/resource/upload.do";
 		}
 		$('.selectfiles').fileupload({
-				url: uploadUrl,
-				dataType: 'json',
-				disabled: false,
-				autoUpload: true,
-				acceptFileTypes: /(\.|\/)(jpe?g|png)$/i,
-				maxNumberOfFiles : 1,
-				add: function (e, data) {
-					ImgLoad = layer.load(0, {shade: false});
+			url: uploadUrl,
+			dataType: 'json',
+			disabled: false,
+			autoUpload: true,
+			acceptFileTypes: /(\.|\/)(jpe?g|png)$/i,
+			maxNumberOfFiles : 1,
+			add: function (e, data) {
+				ImgLoad = layer.load(0, {shade: false});
 
-					var localhostImg = data.fileInput[0].value;
-					var imgName = data.originalFiles[0].name;
-					var size = data.originalFiles[0].size/1024;
-					var imgType = (data.files[0].type).split('/')[1] == 'jpeg'?"jpg":(data.files[0].type).spli('/')[1];
-					if(imgType=="jpg"){
-						imgTypeNum = 1;
-					}else{
-						imgTypeNum = 2;
-					}
-					if(size>200){
-						CREAT.layerMsg("图片大小不能超过200KB");
-						layer.close(ImgLoad);
-						return;
-					}
-					data.submit()
-						.success(function (result, textStatus, jqXHR) {
-							var bgW,bgH;
-							var img = new Image();
-							img.src = result.imgUrl;
-							img.onload = function(){
-								bgW = img.width;
-								bgH = img.height;
-								switch ($(".ad_editMain:visible").attr('data-adtype')){
-									case 100:
-									case '100':
-										if(bgW!=750||bgH!=1334){
-											CREAT.layerMsg("图片尺寸不对");
-											layer.close(ImgLoad);
-											return;
-										}else{
-											layer.close(ImgLoad);
-											$(".bgImg").empty();
-											$(".bgImg").append("<img src='"+ result.imgUrl +"' data-imgType='"+imgTypeNum+"'>");
-										}
-										break;
-									case 101:
-									case '101':
-										if(bgW!=750||bgH!=230){
-											CREAT.layerMsg("图片尺寸不对");
-											layer.close(ImgLoad);
-											return;
-										}else{
-											layer.close(ImgLoad);
-											$(".BannerImg").empty();
-											$(".BannerImg").append("<img src='"+ result.imgUrl +"'  data-imgType='"+imgTypeNum+"'>");
-										}
-										break;
-									case 102:
-									case '102':
-										if(bgW!=600||bgH!=750){
-											CREAT.layerMsg("图片尺寸不对");
-											layer.close(ImgLoad);
-											return;
-										}else{
-											layer.close(ImgLoad);
-											$(".bombAdImg").empty();
-											$(".bombAdImg").append("<img src='"+ result.imgUrl +"'  data-imgType='"+imgTypeNum+"'>");
-										}
-										break;
-									case 103:
-									case '103':
-										if(bgW!=347||bgH!=146){
-											CREAT.layerMsg("图片尺寸不对");
-											layer.close(ImgLoad);
-											return;
-										}else{
-											layer.close(ImgLoad);
-											$(".funcImg").empty();
-											$(".funcImg").append("<img src='"+ result.imgUrl +"'  data-imgType='"+imgTypeNum+"'>");
-										}
-										break;
-									case 104:
-									case '104':
-										if($("input[name='imgsize']:checked").val()=="1"){
-											if(bgW!=96||bgH!=96){
-												CREAT.layerMsg("图片尺寸不对");
-												layer.close(ImgLoad);
-												return;
-											}else{
-												layer.close(ImgLoad);
-												$(".infoImgsmall").empty();
-												$(".infoImgsmall").append("<img src='"+ result.imgUrl +"'  data-imgType='"+imgTypeNum+"'>");
-											}
-										}
-										if($("input[name='imgsize']:checked").val()=="2"){
-											if(bgW!=690||bgH!=230){
-												CREAT.layerMsg("图片尺寸不对");
-												layer.close(ImgLoad);
-												return;
-											}else{
-												layer.close(ImgLoad);
-												$(".infoImgbig").empty();
-												$(".infoImgbig").append("<img src='"+ result.imgUrl +"'  data-imgType='"+imgTypeNum+"'>");
-											}
-										}
-										break;
-									case 105:
-									case '105':
-										if(bgW!=750||bgH!=1334){
-											CREAT.layerMsg("图片尺寸不对");
-											layer.close(ImgLoad);
-											return;
-										}else{
-											layer.close(ImgLoad);
-											$(".fullAdImg").empty();
-											$(".fullAdImg").append("<img src='"+ result.imgUrl +"'  data-imgType='"+imgTypeNum+"'>");
-										}
-										break;
-									case 106:
-									case '106':
-										if(bgW!=750||bgH!=1334){
-											CREAT.layerMsg("图片尺寸不对");
-											layer.close(ImgLoad);
-											return;
-										}else{
-											layer.close(ImgLoad);
-											$(".jumpAdImg").empty();
-											$(".jumpAdImg").append("<img src='"+ result.imgUrl +"'  data-imgType='"+imgTypeNum+"'>");
-										}
-										break;
-								}
-
-						 }
-						})
-						.error(function (jqXHR, textStatus, errorThrown) {
-							layer.close(ImgLoad);
-							CREAT.layerMsg("上传出错了，稍后重试");
-						})
-				},
-				done: function (e, data) {
-					//完成后进行的操作
-					layer.close(ImgLoad);
+				var localhostImg = data.fileInput[0].value;
+				var imgName = data.originalFiles[0].name;
+				var size = data.originalFiles[0].size/1024;
+				var imgType = (data.files[0].type).split('/')[1] == 'jpeg'?"jpg":(data.files[0].type).spli('/')[1];
+				if(imgType=="jpg"){
+					imgTypeNum = 1;
+				}else{
+					imgTypeNum = 2;
 				}
+				if(size>200){
+					CREAT.layerMsg("图片大小不能超过200KB");
+					layer.close(ImgLoad);
+					return;
+				}
+				data.submit()
+					.success(function (result, textStatus, jqXHR) {
+						var bgW,bgH;
+						var img = new Image();
+						img.src = result.imgUrl;
+						img.onload = function(){
+							bgW = img.width;
+							bgH = img.height;
+							switch ($(".ad_editMain:visible").attr('data-adtype')){
+								case 100:
+								case '100':
+									if(bgW!=750||bgH!=1334){
+										CREAT.layerMsg("图片尺寸不对");
+										layer.close(ImgLoad);
+										return;
+									}else{
+										layer.close(ImgLoad);
+										$(".bgImg").empty();
+										$(".bgImg").append("<img src='"+ result.imgUrl +"' data-imgType='"+imgTypeNum+"'>");
+									}
+									break;
+								case 101:
+								case '101':
+									if(bgW!=750||bgH!=230){
+										CREAT.layerMsg("图片尺寸不对");
+										layer.close(ImgLoad);
+										return;
+									}else{
+										layer.close(ImgLoad);
+										$(".BannerImg").empty();
+										$(".BannerImg").append("<img src='"+ result.imgUrl +"'  data-imgType='"+imgTypeNum+"'>");
+									}
+									break;
+								case 102:
+								case '102':
+									if(bgW!=600||bgH!=750){
+										CREAT.layerMsg("图片尺寸不对");
+										layer.close(ImgLoad);
+										return;
+									}else{
+										layer.close(ImgLoad);
+										$(".bombAdImg").empty();
+										$(".bombAdImg").append("<img src='"+ result.imgUrl +"'  data-imgType='"+imgTypeNum+"'>");
+									}
+									break;
+								case 103:
+								case '103':
+									if(bgW!=347||bgH!=146){
+										CREAT.layerMsg("图片尺寸不对");
+										layer.close(ImgLoad);
+										return;
+									}else{
+										layer.close(ImgLoad);
+										$(".funcImg").empty();
+										$(".funcImg").append("<img src='"+ result.imgUrl +"'  data-imgType='"+imgTypeNum+"'>");
+									}
+									break;
+								case 104:
+								case '104':
+									if($("input[name='imgsize']:checked").val()=="1"){
+										if(bgW!=96||bgH!=96){
+											CREAT.layerMsg("图片尺寸不对");
+											layer.close(ImgLoad);
+											return;
+										}else{
+											layer.close(ImgLoad);
+											$(".infoImgsmall").empty();
+											$(".infoImgsmall").append("<img src='"+ result.imgUrl +"'  data-imgType='"+imgTypeNum+"'>");
+										}
+									}
+									if($("input[name='imgsize']:checked").val()=="2"){
+										if(bgW!=690||bgH!=230){
+											CREAT.layerMsg("图片尺寸不对");
+											layer.close(ImgLoad);
+											return;
+										}else{
+											layer.close(ImgLoad);
+											$(".infoImgbig").empty();
+											$(".infoImgbig").append("<img src='"+ result.imgUrl +"'  data-imgType='"+imgTypeNum+"'>");
+										}
+									}
+									break;
+								case 105:
+								case '105':
+									if(bgW!=750||bgH!=1334){
+										CREAT.layerMsg("图片尺寸不对");
+										layer.close(ImgLoad);
+										return;
+									}else{
+										layer.close(ImgLoad);
+										$(".fullAdImg").empty();
+										$(".fullAdImg").append("<img src='"+ result.imgUrl +"'  data-imgType='"+imgTypeNum+"'>");
+									}
+									break;
+								case 106:
+								case '106':
+									if(bgW!=750||bgH!=1334){
+										CREAT.layerMsg("图片尺寸不对");
+										layer.close(ImgLoad);
+										return;
+									}else{
+										layer.close(ImgLoad);
+										$(".jumpAdImg").empty();
+										$(".jumpAdImg").append("<img src='"+ result.imgUrl +"'  data-imgType='"+imgTypeNum+"'>");
+									}
+									break;
+							}
+
+					 }
+					})
+					.error(function (jqXHR, textStatus, errorThrown) {
+						layer.close(ImgLoad);
+						CREAT.layerMsg("上传出错了，稍后重试");
+					})
+			},
+			done: function (e, data) {
+				//完成后进行的操作
+				layer.close(ImgLoad);
+			}
 		});
 	},
 	imgsizeCheck(){
